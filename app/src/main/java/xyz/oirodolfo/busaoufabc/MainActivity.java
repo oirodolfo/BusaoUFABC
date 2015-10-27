@@ -27,7 +27,7 @@ import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import xyz.oirodolfo.busaoufabc.API.BusAPI;
 import xyz.oirodolfo.busaoufabc.domain.Place;
-import xyz.oirodolfo.busaoufabc.utils.BusDes;
+import xyz.oirodolfo.busaoufabc.utils.ResponseTypeAdapterFactory;
 
 
 public class MainActivity extends AppCompatActivity
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity
     protected void onPostResume() {
         super.onPostResume();
 
-        Gson gson = new GsonBuilder().registerTypeAdapter(Place.class, new BusDes()).create();
+        Gson gson = new GsonBuilder().registerTypeAdapter(Place.class, new ResponseTypeAdapterFactory()).create();
 
         Retrofit retrofit = new Retrofit
                 .Builder()
