@@ -11,6 +11,31 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group(['prefix' => 'api'], function ()
+{
+    Route::group(['prefix' => 'v1'], function ()
+    {
+        Route::get('all', ['uses' => 'BusController@index']);
+
+        Route::get('line/{id}', function ($id)
+        {
+            $app = app();
+            $controller = $app->make('App\Http\Controllers\BusController');
+            return $controller->callAction('getByLine', $parameters = ['id' => $id]);
+        });
+
+        Route::get('place/{id}', function ($id)
+        {
+            $app = app();
+            $controller = $app->make('App\Http\Controllers\BusController');
+            return $controller->callAction('getByPlace', $parameters = ['id' => $id]);
+        });
+
+        Route::get('places',['uses'=>'BusController@places']);
+
+
+
+    });
+
 });
